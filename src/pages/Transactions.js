@@ -27,14 +27,14 @@ export default function Transactions(){
         .trim();
     };
 
-    const filteredTransactions = transactions.filter((t) => {
+    const filteredTransactions = Array.isArray(transactions) ? transactions.filter((t) => {
         if (!t) return false;
         const code = normalize(t.transaction_code || "");
         const symbol = normalize(t.symbol || "");
         const searchText = normalize(search);
         if (!searchText) return true;
-        return code.includes(searchText) || symbol.includes(searchText);
-    });
+        return (code.includes(searchText) || symbol.includes(searchText));
+    }) : [];
 
     return (
         <div style={{ padding: "20px" }}>

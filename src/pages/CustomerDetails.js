@@ -16,7 +16,6 @@ React.useEffect(()=>{
     const fetchCustomers = async()=>{
       try{
         const data = await getActiveCustomers();
-        console.log("Fetched customers:", data);
         setCustomers(data);
       }catch(error){
         console.error("Error fetching customers:", error);
