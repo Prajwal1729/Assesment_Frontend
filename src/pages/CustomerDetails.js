@@ -16,6 +16,7 @@ React.useEffect(()=>{
     const fetchCustomers = async()=>{
       try{
         const data = await getActiveCustomers();
+        console.log("Fetched customers:", data);
         setCustomers(data);
       }catch(error){
         console.error("Error fetching customers:", error);
@@ -32,17 +33,22 @@ const normalize = (text) => {
     .trim();
 };
 
-const filteredCustomers = customers.filter((c) => {
-  if (!c) return false;
+const filteredCustomers = Array.isArray(customers)
+  ? customers.filter((c) => {
+      if (!c) return false;
 
-  const name = normalize(c.name);
-  const address = normalize(c.address);
-  const searchText = normalize(search);
+      const name = normalize(c.name);
+      const address = normalize(c.address);
+      const searchText = normalize(search);
 
-  if (!searchText) return true;
+      if (!searchText) return true;
 
-  return name.includes(searchText) || address.includes(searchText);
-});
+      return (
+        name.includes(searchText) ||
+        address.includes(searchText)
+      );
+    })
+  : [];
 
 
   return (
