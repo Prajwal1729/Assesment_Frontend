@@ -24,16 +24,25 @@ React.useEffect(()=>{
     fetchCustomers();
 },[]);
 
-const normalize = (str) =>
-  str.replace(/\s+/g, " ").toLowerCase().trim();
+const normalize = (text) => {
+  return String(text)
+    .toLowerCase()
+    .replace(/\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
 
- const filteredCustomers = customers.filter(c => {
-  const name = normalize(c.name || "");
-  const address = normalize(c.address || "");
+const filteredCustomers = customers.filter((c) => {
+  if (!c) return false;
+
+  const name = normalize(c.name);
+  const address = normalize(c.address);
   const searchText = normalize(search);
 
+  if (!searchText) return true;
+
   return name.includes(searchText) || address.includes(searchText);
- });
+});
 
 
   return (

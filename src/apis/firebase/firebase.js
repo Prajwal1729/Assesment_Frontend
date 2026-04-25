@@ -6,7 +6,7 @@ const firebaseConfig = {
   authDomain: process.env.REACT_APP_PROJECT_DOMAIN_NAME,
   projectId: process.env.REACT_APP_PROJECT_ID
 };
-console.log("Firebase Config:", firebaseConfig); // Debugging line to check config values
+
 
 const app = initializeApp(firebaseConfig);
 

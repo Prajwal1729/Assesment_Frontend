@@ -20,16 +20,23 @@ export default function Transactions(){
         fetchTransactions();
     },[decodedAccountId]);
 
-    const normalize = (str) =>
-      str.replace(/\s+/g, " ").toLowerCase().trim();
-    const filteredTransactions = transactions.filter(t=>{
+    const normalize = (text) => {
+      return String(text)
+        .replace(/\s+/g, " ")
+        .toLowerCase()
+        .trim();
+    };
+
+    const filteredTransactions = transactions.filter((t) => {
+        if (!t) return false;
         const code = normalize(t.transaction_code || "");
         const symbol = normalize(t.symbol || "");
         const searchText = normalize(search);
+        if (!searchText) return true;
         return code.includes(searchText) || symbol.includes(searchText);
     });
 
-    return(
+    return (
         <div style={{ padding: "20px" }}>
             <h1>Transactions for Account: {decodedAccountId}</h1>
             <input
