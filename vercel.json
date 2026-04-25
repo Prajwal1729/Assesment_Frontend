@@ -1,5 +1,9 @@
 {
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://assesment-backend-mq31.onrender.com/api/$1"
+    },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
   ]
