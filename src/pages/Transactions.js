@@ -18,7 +18,7 @@ export default function Transactions(){
             }
         }
         fetchTransactions();
-    },[accountId]);
+    },[decodedAccountId]);
 
     const normalize = (str) =>
       str.replace(/\s+/g, " ").toLowerCase().trim();
